@@ -1,0 +1,81 @@
+There are 6 classes, 8 races, 40 experience levels, 18 owners, 6 stores
+
+Things that should probably be records:
+
+The log of messages.  Make it a circular buffer!
+	N messages x 80char
+The player titles  Char *player_title[MAX_CLASS][MAX_PLAYER_LEVEL];
+	6 x 40 x strlen(14)
+	3k
+* The backgrounds    background_type background[MAX_BACKGROUND];
+	128 x (strlen(51) + 4 Short)
+	7k
+Experience table   ULong player_exp[MAX_PLAYER_LEVEL];
+	40 x Long
+	<1k
+Hit point table    UShort player_hp[MAX_PLAYER_LEVEL];
+	40 x Short
+	<1k
+Race gold table    UChar rgold_adj[MAX_RACES][MAX_RACES];
+	8 x 8
+	<1k
+Spell name table   Char *spell_names[62];
+	62 x strlen(24)
+	1k
+Order spells learned in   UChar spell_order[32];
+	32
+	<1k
+Store owners       owner_type owners[MAX_OWNERS];
+	18 x (strlen(50) + 4 Short)
+	1k
+Types of stores    store_type store[MAX_STORES];
+	6 x (Long,3Short,2Char,inven_record)
+	?
+Store selection    UShort store_choice[MAX_STORES][STORE_CHOICES];
+	6 x 26 x Short
+	<1k
+* Types of objects   treasure_type object_list[MAX_OBJECTS];
+	420 x (2Long,6Short,7Char, strlen(32?))
+	24k?
+foo "of slaying"   Char *special_names[SN_ARRAY_SIZE];
+	56 x strlen(19)
+	1k
+* Types of monsters  creature_type c_list[MAX_CREATURES];
+	279 x (2Long,2Short,12Char, strlen(26))
+	13k
+Attack type table  m_attack_type monster_attacks[N_MONS_ATTS];
+	215 x 4Char
+	<1k
+strings            Char *colors[MAX_COLORS];
+strings            Char *mushrooms[MAX_MUSH];
+strings            Char *woods[MAX_WOODS];
+strings            Char *metals[MAX_METALS];
+strings            Char *rocks[MAX_ROCKS];
+strings            Char *amulets[MAX_AMULETS];
+strings            Char *syllables[MAX_SYLLABLES];
+	{49,22,25,25,32,11,153} x strlen(16,14,11,16,13,15,5)
+	@ <1k
+distribution!      UShort normal_table[NORMAL_TABLE_SIZE];
+	256 x Short
+	<1k
+
+Things that could maybe be records:
+
+The cave           cave_type cave[MAX_HEIGHT][MAX_WIDTH];
+	
+The race types     race_type race[MAX_RACES];
+Whatever this is   class_type class[MAX_CLASS];
+Whatever that is   Short class_level_adj[MAX_CLASS][MAX_LEV_ADJ];
+Whatever this is   spell_type magic_spell[MAX_CLASS-1][31];
+Whatever this is   UShort player_init[MAX_CLASS][5];
+Known objects      UChar object_ident[OBJECT_IDENT_SIZE];
+object magic       Short t_level[MAX_OBJ_LEVEL+1];
+Objects on level   inven_type t_list[MAX_TALLOC];
+Your inventory     inven_type inventory[INVEN_ARRAY_SIZE];
+Whatever this is   Short sorted_objects[MAX_DUNGEON_OBJ];
+Monsters on level? monster_type m_list[MAX_MALLOC];
+Whatever this is   Short m_level[MAX_MONS_LEVEL+1];
+Whatever this is   recall_type c_recall[MAX_CREATURES];	// Monster memories
+
+// There is a maximum of 64K records per database, and a maximum of
+// almost 64K per record.  (in 3.0)

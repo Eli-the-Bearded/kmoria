@@ -1,0 +1,25 @@
+#include "kMoriaBuildRsc.h"
+
+VERSION ID 1 "0.01"
+
+ICON "iLarn2.bmp"
+SMALLICON "iLarnSmall.bmp"
+
+FORM ID MainForm AT (0 0 160 160)
+USABLE
+NOFRAME
+BEGIN
+	TITLE "Build kMoria Database"
+	BUTTON "Rebuild Database" ID btn_ok AT (50 50 AUTO AUTO) USABLE
+END
+
+STRING HelpStr "This will rebuild your constants database."\
+		"It wipes out what was already there!"
+
+ALERT ID NukeP
+WARNING
+BEGIN
+	TITLE "Are you sure?"
+	MESSAGE "Rebuilding the database will wipe out stuff."
+	BUTTON "I'm sure" "No, don't do it!"
+END

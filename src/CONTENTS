@@ -1,0 +1,124 @@
+Status and provenance of various files in here.
+
+
+copyright.txt - waiting til I decide on a name to include this in places.
+
+dbrecords.c - this is a file that will need to be split up
+	one half is for a little application to write the "read only" db
+	the other half is for reading all dbs and writing some parts of save db
+	the two half are totally intermingled
+not currently used
+
+dbrecords.h - this documents which routines actually belong to the game
+	as opposed to the little db-writing application
+not currently used
+
+globals.h - The type definition of the 'everything' struct
+	Some things here could be SaveDB records instead!
+
+gzip.txt - some vague notes on packing of data (to keep databases small)
+
+records.h - where to define the constants that are record unique ID's.
+	dbrecords.c should #include this
+not currently used
+
+These have had indenting (and ansitude of args) cleaned up but that's about it.
+	i.e. they need to be databaseified
+store1.c
+moria4.c  * needs highlight_seams and many functions
+let's look at cleaning up: moria3.c
+
+ * the compiler is happy except for missing functions & undeclared globals
+
+
+things that are used as of july 9...
+
+kMoria.h: what the app id is, etc, and what header files to include
+
+sections.h: for multigen
+kMoria.def: for multigen
+
+constant.h - These are #define's of numbers.  (not #define macros)
+	I made a first pass on this.
+	A few things still need to change or to be removed!!
+
+types.h - type definitions.
+	I have been through this once, but it will need more work.
+	Especially since I am not exactly going to have "char *"'s
+	and therefore all the careful record packing needs fixed.
+
+prototypes.h - function prototypes
+
+records.h - what unique-ids are of the various records
+
+main.c - event handlers etc. are here
+
+display.c - drawing dungeon, stats, messages to the screen
+
+lock.c - create/lock/unlock the database records and _some_ write/read stuff
+
+section1:
+misc1.c - has everything original misc1.c did?
+	needs a REAL randnor, compact_monsters, compact_objects ...
+	'panel' foo needs to be REWORKED and moved to display.c
+generate.c - generate level; has everything original generate.c did?
+misc2.c - has everything original misc2.c did?
+	set_options NEEDS TO BE IMPLEMENTED and should be a popup form
+sets.c - 'is-a' functions that could practically be macros.
+	all there, I think
+
+misc3.c - SOME MISSING.  some of what's missing belongs in display.c
+moria3.c - no functions missing now
+recall.c - working! (with form_recall.c)
+	I haven't DESIGNED how you would get to this form UI-wise, though.
+
+eat.c - ok, I think
+potions.c - ditto
+moria2.c - there except for COMMENTED-OUT LINES.  actually, all there?
+spells.c - all there except for (many) COMMENTED-OUT LINES.  yep still.
+misc4.c - here too there are COMMENTED-OUT LINES.  yep still.
+staffs.c - sorta all there but needs direction foo
+wands.c - sorta all there but needs direction foo
+magic.c - all there except for several COMMENTED-OUT LINES.  yep still.
+prayer.c - all there except for several COMMENTED-OUT LINES (same as magic.c)
+moria4.c - all there except for several COMMENTED-OUT LINES (different)
+
+what shall I work on?...................................................
+
+things that MUST be changed for DmWrite:  enchant() --- Done, 10/5
+also vaguely working on getting eat.c to compile.  OK
+Character Generation!  It is (for the most part) WORKING.
+  Check later and see if I have forgotten anything though.
+  I need py.* save and restore (for ungenerated)
+  I need magic_init (for both!?)
+inventory/equipment are viewable.
+wear/wield, take off, drop basically work
+
+To do: add mushrooms, etc., in lock.c and in the MoriaDB.
+
+regressive testing:
+have I tested unsample?  I suspect it is buggy.
+
+to steal from iLarn:  '--more--' ability
+
+** End of september: **
+Worked on store2.c.  it's all there now, just a tad buggy in places.
+I have processed creature.c and it compiles.  untested of course.
+
+things that are not implemented yet:  move_char (moria3),
+would be used in spells.c - prt_map, put_qio, damage-subroutines in breath(),
+prt_level, prt_title.
+
+to do: check out misc3
+       count_message isn't implemented
+
+Priest and mage type characters can gain and cast now.  People can browse.
+Note: it might be a real good idea to move gain_spells into form_spell.c,
+      or otherwise to scope down the globals that those two share.
+I am adding examine_book from (missing) dungeon.c to random .c location
+
+.c files that are currently missing in Makefile:
+# Missing:  [just-data] (impl-elsewhere) |n/a|
+* death dungeon files help (|io|) [monsters] [player] |rnd|
+# save scrolls |signals| [tables] [treasure] [variable] |wizard|
+

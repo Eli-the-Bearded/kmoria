@@ -1,0 +1,51 @@
+/* i don't NEED gzip, I just need run-length and sparse foo.
+
+see http://www.skoardy.demon.co.uk/rlnews/dev00014.html
+I think that will be a big help!
+
+also http://www.skoardy.demon.co.uk/rlnews/dev00009.html
+
+Ok, suppose I do run-length on the dungeon architecture..
+I should do it along the rows which are 67 (65) long
+Clearly I can hold length-of-run in a char.
+If I can hold what the run is of in a char also, I am real happy,
+otherwise both will have to be Short or something
+
+Represent the dungeon map as run-length bits (OWALL/other).
+67 columns = 9 bytes, 17 rows = 153 bytes
+plus 1 byte for "how MANY objects" = 154 bytes
+
+If objects are usually sparse, represent them as (x,y,thing)
+where x and y are Char and thing is {Short itm, Short arg}
+That is 6 bytes per object; 6n bytes
+If objects are usually dense, represent them as 153-byte bitfield
+(object/noobject) and Short,Short per object: 154+4n bytes
+(The break-even point is 77+ objects.)
+Same thing could be the case for monsters.
+
+Ok - what do we do with [maxx][maxy] arrays:
+
+Char item, Short iarg = item data (type, foo)
+Char mitem, Short hitp, Bit stealth = monster data (type, hitpoints, is_awake)
+   (NOTE: hitp is signed, max 0x7fff; I can use the sign bit for stealth,
+   because no monster with negative hitpoints should ever be saved!!)
+Trit know = 0,1,2 but should be very nicely run-lengthed
+Bit moved (I think that I don't save this anyway)
+
+Ok, let's do it this way:
+bitfield 0,1 of wall/no-wall (154 bytes)
+runlength-or-something 0,1,2 of know.. worst case, two bitfields (308 bytes)
+bitfield 0,1 of object/no-obj = #no-wall bytes... there are no objs in walls!
+1char = number of objects
+(char type, short iarg) describing each object
+   ...make this a char array and a short array of length #obj
+bitfield 0,1 of object/no-obj = #no-wall bytes... there are no mons in walls!
+1char = number of monsters
+(char type, short hp) describing each monste
+   ...make this a char array and a short array of length #mon
+so, about 700 bytes of bitfields, plus 3 bytes per obj and 3 bytes per mon.
+that should save a reasonable amount of space.  like maybe 90%.
+
+*/
+
+#include ...

@@ -1,0 +1,81 @@
+Bugs in store:
+-------------
+
+You can attempt to buy a "..." item and this is not caught
+(the description shows up as "error in objdes()" or something)
+This is not a problem for the sell command of course.
+Ok, I have fixed that.  Tested out ok.  9/29
+
+Hm, seems like scrolling is not working yet.
+Ok, I have fixed that.  Tested out ok.  9/29
+
+When you buy something, the store's inventory display does not update.
+Ok, sort of fixed.  There's still a bug.  When the last item moves up,
+things get screwy.  I will fix this some other day.
+
+"Buying: 20 Rations of Food"
+"Buying: 10 Strips of Beef Jerky"
+um, try *1*?
+
+Suggestions for store:
+---------------------
+
+Perhaps the <- +> should disable themselves when there's < 1 screen of items!!
+ok.  still visible but returns w/o redrawing.  9/29
+Perhaps there is room for a page number btwn <- and +>.
+ok, done.  9/29
+
+Incomplete implementation:
+-------------------------
+(Selling basically works now)
+
+
+(Notes:  if ".text" region is full, do not panic;
+move stuff out of the default code section into e.g. SEC_4).
+
+
+Things to do when I have nothing better to do:
+------------
+add monster_attacks to lock.c !!!!!!  currently it's in recall.c
+
+fix the tiny-print stats for 18/xx stats. currentyl fsked.
+
+all forms need (i) information strings!
+
+"quit" doesn't work
+
+magic.c: cast_helper does not get 'dir' for spells that need it!!
+         same for prayer.c and pray_helper
+moria4.c: look_see needs frobbing also.
+
+command count.
+
+--------------------------------------------------------------------
+I still need an initial "you can gain <foo>s" message when char created!
+
+are mana points being decreased?  YES but:
+they're increased when you Gain but it's not showing til next turn. ohwell.
+
+oh, by the way, you don't need a light source in dungeons and all is 'known'!
+did I disable something or what?
+(interesting you don't run in 'dark' corridors.)
+
+running: leaves a @ drawn at the location where you started running.
+	fixed: initialize find_prself to true. (bug in sub3_move_light?)
+runfighting doesn't work properly I think.
+	actually I think this might be a feature.  "oops"/ow
+you're not redrawn when you pick something up?
+cool, opening doors works (and closing and off-balance branch of forcing)
+
+unfortunately it is sometimes STILL the case that when you start out
+in a new dungeon level it does not draw you at first?
+
+sometimes it locks up, with no error given in simulator or xterm,
+after killing e.g. battle-scarred veteran monster which leaves an object.
+could be out of memory or who knows what.
+it did this when I walked on a potoin or scroll or something; maybe name fscked
+
+Looks like the AC is not changing when I wear armor
+need run to *hit* a monster if you *start out* next to it
+redrawing screen is SLOW.
+"rest" is not actually implemented yet - it's maybe missing some pieces.

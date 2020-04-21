@@ -1,0 +1,23 @@
+First pass done: wands.c
+Working on:
+
+Needs to be part of dbrecords: treasure.c tables.c
+Needs to be part of global: variable.c
+?: unix.c
+
+Needs to be partly UI and form stuff: store2.c
+
+----------------------------------------------
+(above was like back in june/july)
+
+end of september:
+It looks like generate.c is ok.  I fixed that bug in fill_cave.
+These are all the puppies in the Makefile
+UIOBJS = form_about.o form_inv.o form_equ.o form_recall.o form_chargen.o \
+       form_store.o
+OBJS = main.o display.o lock.o generate.o sets.o desc.o recall.o util.o \
+       misc1.o misc2.o misc3.o misc4.o moria1.o moria2.o create.o \
+       eat.o potions.o staffs.o wands.o   store1.o \
+       magic.o prayer.o spells.o moria3a.o moria4.o misc5.o \
+       $(UIOBJS) $(TARGET)-sections.o
+See CONTENTS for what to work on next.

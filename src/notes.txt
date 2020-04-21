@@ -1,0 +1,93 @@
+Moria:  (note there is already an IMoria)
+
+Version 5.5.2, which seems to date from Jul 21, 1994.
+
+ERRORS file has a lot of potential changes
+
+Original author: Robert Alan Koeneke (VMS)
+VMS Moria mutated into UNIX Moria: Jim (James E.) Wilson
+VMS Moria mutated into PC Moria: Don Kneller
+UMoria mutated into BRUCE Moria: Christopher J. Stuart
+UMoria 5.* (Jim Wilson) is based on all of the above.
+
+
+
+config.h: defines file names, some system dependent foo
+
+constant.h: a buttload of #define'd values
+ #define MAX_HEIGHT  66      /* Multiple of 11; >= 22 */
+ #define MAX_WIDTH  198    /* Multiple of 33; >= 66 */
+ #define SCREEN_HEIGHT  22
+ #define SCREEN_WIDTH   66
+this suggests that dungeon levels might be as much as 66x198
+
+externs.h: global variables
+ these want to get stuffed into one of my MegaStructs again
+ Booleans: rogue_like_commands through light_flag, except these:
+ Bitfields: noscore (3 bits), spell_learned, spell_worked, spell_forgotten,
+	object_ident[]
+ Char: doing_inv, closing_flag, blows_table[][]
+ Short: command_count (0-99), dun_level (0-99), missile_ctr, cur_height,
+	cur_width, *panel*, char_row, char_col,	inven_ctr, inven_weight,
+	equip_ctr, tcptr, mfptr, mon_tot_mult
+ Short?Long?: turn (-1 to infinity), days[][], max_score,
+ eliminate or mutate: randes_seed, town_seed, old_msg[], last_msg, panic_save
+ array of strings: player_title, spell_names, special_names,
+	colors, mushrooms, woods, metals, rocks, amulets, syllables
+ array of struct: cave[][], race_type[], background_type[], class_type[],
+	magic_spell[][], owners[], store[], object_list[],
+	t_list[], inventory[], c_list[], m_list[],
+	monster_attacks[], c_recall[], blank_monster
+ array of numbers: player_exp[], player_hp[], rgold_adj[][],
+	class_level_adj[][], spell_order[], player_init[][],
+	store_choice[][], t_level[], m_level[], normal_table[] (INSANE)
+cave_type has: Bytes cptr, tptr, fval; Bits lr, fm, pl, tl
+(cptr, tptr are array indices; fval is floor-type a defined constant)
+so each cave cell requires 4 bytes.
+the entire cave level would be 66x198x4 bytes, >50k, as things stand now.
+
+
+types.h: define a bunch of structs.
+
+
+create.c: character creation
+creature.c: monster movement/action
+death.c: update high-score list
+desc.c: init potion/scroll/etc arrays; other object identity/description foo
+dungeon.c: the Big Loop
+eat.c: eat food.
+files.c
+generate.c: generate a cave level
+help.c: ask what a character value represents
+io.c
+magic.c: cast a spell
+main.c: credits (retain these); initialization
+misc1-misc4: misc; utility, init, magic items, maintenance, printing stats
+monsters.c: big array
+moria1-moria4: misc code, mainly player commands
+player.c: big arrays
+potions.c: quaff a potion
+prayer.c: praying
+recall.c: "print out monster memory info"?
+rnd.c: random
+save.c
+scrolls.c: read a scroll
+sets.c: oh lord.  boolean properties, basically. (e.g. acid destroys it)
+signals.c
+spells.c: functions that do the work for spells
+staffs.c: use a staff
+store1.c: prices, inventory
+store2.c: entering, haggling, buying, selling
+tables.c: lot o data
+treasure.c: object data table
+unix.c
+variables.c: the global cruft
+wands.c: use a wand
+wizard.c: debugging aids
+
+
+
+NOTES for iLarn:
+Split 'genocided' OUT of the monster data
+Move all constant-between-games data into a different database!
+Then it is safe for people to blow-away the save database.

@@ -1,0 +1,28 @@
+kMoria 0.1
+==========
+
+This is Bridget Spitznagel's Mines of Moria roguelike game for PalmOS
+/ Palm Pilot. It is derived from Umoria (Unix Moria) 5.5.2. Major
+changes include resizing the 80x24 screen down for the smaller screen
+size of the Palm Pilots and adapting it to the Graffiti input used by
+PalmOS devices.
+
+I've made no changes to this code, I just collected it for reference.
+I played this game extensively on a second hand Palm VII in 2000-2001.
+
+Official page for kMoria:
+
+http://roguelike-palm.sourceforge.net/kMoria/
+
+There are screenshots and usage guides there.
+
+
+See also:
+
+https://en.wikipedia.org/wiki/Palm_OS
+
+https://en.wikipedia.org/wiki/Graffiti_(Palm_OS)
+
+https://en.wikipedia.org/wiki/Palm_VII
+
+(Eli the Bearded, April 2020)

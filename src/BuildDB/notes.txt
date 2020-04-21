@@ -1,0 +1,3 @@
+With just the two object records: 17110 B  (objects   are 17110 B)  2 recs
+Add the two creature records:     28706 B  (creatures are 11596 B)  4 recs
+Add the tlevel, mlevel, sortobj:  29632 B                           7 recs

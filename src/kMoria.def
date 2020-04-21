@@ -1,0 +1,5 @@
+application { "kMoria" Mria }
+
+/* This app is not interesting yet  */
+
+multiple code { sec_1 sec_2 sec_3 sec_4 sec_5 }
